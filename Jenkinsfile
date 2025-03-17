@@ -1,28 +1,24 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/Puneet0812/JenkinsPuneet.git'
+                git 'https://github.com/Puneet0812/JenkinsPuneet.git'
             }
         }
-
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Building the application...'
+                sh 'pip install -r requirements.txt'
             }
         }
-
-        stage('Test') {
+        stage('Run Tests') {
             steps {
-                echo 'Running tests...'
+                sh 'python -m unittest discover'
             }
         }
-
-        stage('Notify') {
+        stage('Deploy Application') {
             steps {
-                echo 'Sending notification...'
+                sh 'nohup python app.py &'
             }
         }
     }
