@@ -4,42 +4,26 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/yourusername/yourrepo.git'
+                git branch: 'main', url: 'https://github.com/Puneet0812/JenkinsPuneet.git'
             }
         }
 
         stage('Build') {
             steps {
-                echo "Building the application..."
-                // Add actual build commands (e.g., npm install, mvn package)
+                echo 'Building the application...'
             }
         }
 
         stage('Test') {
             steps {
-                echo "Running tests..."
-                // Add test commands
+                echo 'Running tests...'
             }
         }
 
-        stage('Deploy') {
+        stage('Notify') {
             steps {
-                echo "Deploying application..."
-                // Add deployment commands (optional)
+                echo 'Sending notification...'
             }
-        }
-    }
-
-    post {
-        success {
-            mail to: 'yourcollegeemail@example.com',
-                 subject: "Jenkins Build Success",
-                 body: "The build was successful."
-        }
-        failure {
-            mail to: 'yourcollegeemail@example.com',
-                 subject: "Jenkins Build Failed",
-                 body: "The build failed. Check logs."
         }
     }
 }
